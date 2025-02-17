@@ -1,24 +1,27 @@
-package libraries.input;
+package simpleinput;
 
 import java.io.BufferedReader;
-import java.io.InputStreamReader;
+import java.io.Reader;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
 public class Input {
-    public static <T> T translateInput(Function<String[], T> processor, Supplier<T> onError) {
-        try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in)))
+    public static <R> R translateInput(Reader reader, Function<String[], R> processor, Supplier<R> onError) {
+        try (BufferedReader bufferedReader = new BufferedReader(reader))
             {
                 String line = bufferedReader.readLine();
                 String[] tokens = line.trim().split(" ");
                 
                 return processor.apply(tokens);
             }
-        catch (Exception e) { return onError.get(); }
+        catch (Exception e) {
+            e.printStackTrace();
+            return onError.get();
+        }
     }
     
-    public static void processInputs(Function<String[], Boolean> processor, Supplier<Boolean> onError) {
-        try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in)))
+    public static void processInputs(Reader reader, Function<String[], Boolean> processor, Runnable onError) {
+        try (BufferedReader bufferedReader = new BufferedReader(reader))
             {
                 Boolean isRunning = true;
                 do {
@@ -31,8 +34,8 @@ public class Input {
                 } while (isRunning == null || isRunning);
             }
         catch (Exception e) {
-            System.err.println(e.toString());
-            onError.get();
+            e.printStackTrace();
+            onError.run();
         }
     }
 }

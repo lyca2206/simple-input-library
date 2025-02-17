@@ -1,7 +1,7 @@
-package libraries.input.command.generic;
+package simpleinput.command.generic;
 
-import libraries.input.command.Command;
-import libraries.input.command.CommandProcessor;
+import simpleinput.command.Command;
+import simpleinput.command.CommandProcessor;
 
 public class QuitCommand extends Command<Boolean> {
     public QuitCommand(

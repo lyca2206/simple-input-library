@@ -1,14 +1,14 @@
-package libraries.input.command.generic;
+package simpleinput.command.generic;
 
 import java.util.Arrays;
 
-import libraries.input.command.Command;
-import libraries.input.command.CommandProcessor;
+import simpleinput.command.Command;
+import simpleinput.command.CommandProcessor;
 
-public class ProcessHelpCommand extends Command<Boolean> {
+public class HelpCommand extends Command<Boolean> {
     private CommandProcessor<Boolean> commandProcessor;
     
-    public ProcessHelpCommand(
+    public HelpCommand(
         String key,
         String information,
         CommandProcessor<Boolean> commandProcessor

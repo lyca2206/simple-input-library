@@ -1,6 +1,6 @@
-package libraries.input.command;
+package simpleinput.command;
 
-public abstract class Command<T> {
+public abstract class Command<R> {
     private String key;
     private String information;
 
@@ -9,7 +9,7 @@ public abstract class Command<T> {
         this.information = information;
     }
 
-    public Command(String key, String information, CommandProcessor<T> commandProcessor) {
+    public Command(String key, String information, CommandProcessor<R> commandProcessor) {
         this.key = key;
         this.information = information;
         commandProcessor.addCommand(this);
@@ -18,5 +18,5 @@ public abstract class Command<T> {
     public String getKey() { return key; }
     public String getInformation() { return information; }
     
-    public abstract T execute(String[] args);
+    public abstract R execute(String[] args);
 }
