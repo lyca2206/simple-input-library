@@ -1,6 +1,7 @@
 package simpleinput;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.Reader;
 import java.util.function.Function;
 import java.util.function.Supplier;
@@ -14,10 +15,7 @@ public class Input {
                 
                 return processor.apply(tokens);
             }
-        catch (Exception e) {
-            e.printStackTrace();
-            return onError.get();
-        }
+        catch (IOException _) { return onError.get(); }
     }
     
     public static void processInputs(Reader reader, Function<String[], Boolean> processor, Runnable onError) {
@@ -33,9 +31,6 @@ public class Input {
                     isRunning = processor.apply(tokens);
                 } while (isRunning == null || isRunning);
             }
-        catch (Exception e) {
-            e.printStackTrace();
-            onError.run();
-        }
+        catch (IOException _) { onError.run(); }
     }
 }
